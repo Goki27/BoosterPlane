@@ -9,8 +9,8 @@ public class Rocket : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        audio = GetComponent<AudioSource>();    
+
+        audio = GetComponent<AudioSource>();
         rigibody = GetComponent<Rigidbody>();
     }
 
@@ -18,13 +18,13 @@ public class Rocket : MonoBehaviour
     void Update()
     {
 
-        
-        movements();    
+        rotate();
+        Thrusting();
     }
 
-
-    void movements() {
-
+    private void Thrusting()
+    {
+        //logic for flight flying and audio touchUp for rocket launch
 
         if (Input.GetKey(KeyCode.Space))
         {
@@ -42,15 +42,29 @@ public class Rocket : MonoBehaviour
         {
             audio.Stop();
         }
-        if(Input.GetKey(KeyCode.L)) { }
+    }
+
+    //logic for movement of the player
+    void rotate()
+    {
+
+        rigibody.freezeRotation = true;
+        if (Input.GetKey(KeyCode.L)) { }
 
         if (Input.GetKey(KeyCode.A))
-        { transform.Rotate(Vector3.forward);
-        
-        } 
+        {
+            transform.Rotate(Vector3.forward);
+
+        }
         else if (Input.GetKey(KeyCode.D))
-        {transform.Rotate(-Vector3.forward);
-        } 
+        {
+            transform.Rotate(-Vector3.forward);
+        }
+        rigibody.freezeRotation = false;
     }
+
+
+
+
 
 }
